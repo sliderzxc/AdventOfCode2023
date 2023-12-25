@@ -1,11 +1,17 @@
-package com.sliderzxc.adventofcode2023
+package com.sliderzxc.aoc23.day1.part1
+
+import com.sliderzxc.aoc23.utils.lines
+import java.io.File
 
 fun main() {
-    // read input
-    val input = generateSequence { readlnOrNull() }.joinToString("\n")
-    val lines = input.lines()
-    print(getSumOfNumberFromStrings(lines))
+    val result = getSumOfNumberFromStrings(inputTextFile.lines())
+    println(result)
 }
+
+val inputTextFile = File(
+    System.getProperty("user.dir"),
+    "solutions/src/main/kotlin/com/sliderzxc/aoc23/day1/part1/input.txt"
+)
 
 fun getSumOfNumberFromStrings(lines: List<String>): Int {
     var value = 0

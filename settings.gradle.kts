@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "AdventOfCode2023"
+rootProject.name = "aot23"
 
 include(":solutions")
