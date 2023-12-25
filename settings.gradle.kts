@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "aot23"
+rootProject.name = "aoc23"
 
 include(":solutions")

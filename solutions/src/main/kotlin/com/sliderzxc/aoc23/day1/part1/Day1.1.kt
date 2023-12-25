@@ -1,45 +1,24 @@
 package com.sliderzxc.aoc23.day1.part1
 
+import com.sliderzxc.aoc23.utils.BASE_PROJECT_DIR
 import com.sliderzxc.aoc23.utils.lines
 import java.io.File
 
-fun main() {
-    val result = getSumOfNumberFromStrings(inputTextFile.lines())
-    println(result)
-}
-
 val inputTextFile = File(
     System.getProperty("user.dir"),
-    "solutions/src/main/kotlin/com/sliderzxc/aoc23/day1/part1/input.txt"
+    "$BASE_PROJECT_DIR/day1/input.txt"
 )
 
-fun getSumOfNumberFromStrings(lines: List<String>): Int {
-    var value = 0
-    lines.forEach { line ->
-        val firstNumber = line.takeFirstNumber()
-        val lastNumber = line.takeLastNumber()
-        value += (firstNumber.toString() + lastNumber.toString()).toInt()
+fun main() {
+    val lines = inputTextFile.lines()
+    val sum = lines.sumOf { line ->
+        val first = line.firstNotNullOf(Char::digitToIntOrNull)
+        val second = line.lastNotNullOf(Char::digitToIntOrNull)
+        ("$first$second").toInt()
     }
-    return value
+    println(sum)
 }
 
-fun String.takeFirstNumber(): Int {
-    var value = 0
-    for (char in this.toList()) {
-        if (char.digitToIntOrNull() != null) {
-            value = char.digitToInt()
-            break
-        }
-    }
-    return value
-}
-
-fun String.takeLastNumber(): Int {
-    var result = 0
-    this.forEach {
-        if (it.digitToIntOrNull() != null) {
-            result = it.digitToInt()
-        }
-    }
-    return result
+private inline fun <T> String.lastNotNullOf(block: (Char) -> T?): T {
+    return reversed().firstNotNullOf(block)
 }
